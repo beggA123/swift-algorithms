@@ -8,13 +8,23 @@
 import Foundation
 
 class Sorting {
-    func bubbleSort(_ data: [Int]) -> [Int] {
-        if data.count == 0 {
-            return []
-        } else if data == [3,5,1,2,9] || data == [1,2,3,5,9] {
-            return [1,2,3,5,9]
+    func bubbleSort(_ input: [Int]) -> [Int] {
+        if input.count == 0 {
+            return input
         } else {
-            return [1,2,3,4,8]
+            var array = input
+            for _ in 0..<array.count {
+              for j in 1..<array.count {
+                if array[j] < array[j-1] {
+                  let temp = array[j-1]
+                  array[j-1] = array[j]
+                  array[j] = temp
+                }
+              }
+            }
+            return array
         }
     }
+    
+    func quickSort(
 }

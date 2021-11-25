@@ -9,48 +9,43 @@ import XCTest
 
 class SortingTest: XCTestCase {
 
-    func testBubbleSortWithUnsortedIntegerArrayReturnsSortedIntegerArray() {
+    func testBubbleSortWithIntegerArrayReturnsSortedIntegerArray() {
         //arrange
         let sorting = Sorting()
-        let testCases = [(input: [3,5,1,2,9, expected: [1,2,3,5,9]),
-                         (input: [1,3,2,4,5], expected: [1,2,3,4,5])]
+        let testCases = [([3,5,1,2,9], [1,2,3,5,9]),
+                         ([1,3,2,4,5], [1,2,3,4,5]),
+                         ([Int()], [Int()]),
+                         ([1,2,3,4,5], [1,2,3,4,5])]
         //act
         for testCase in testCases {
-            let actual = sorting.bubbleSort(data)
+            let actual = sorting.bubbleSort(testCase.0)
+            //assert
+            XCTAssertEqual(actual, testCase.1)
         }
-        //assert
-    }
-
-    func testBubbleSortWithEmptyArrayReturnsEmptyArray() {
-        //arrange
-        let sorting = Sorting()
-        let data = [Int]()
-        let expected = [Int]()
-        //act
-        let actual = sorting.bubbleSort(data)
-        //assert
-        XCTAssertEqual(actual, expected)
     }
     
-    func testBubbleSortWithSortedIntegerArrayReturnsSortedIntegerArray() {
+    func testQuickSortWithIntegerArrayReturnsSortedIntegerArray() {
         //arrange
         let sorting = Sorting()
-        let data = [1,2,3,5,9]
-        let expected = [1,2,3,5,9]
+        let testCases = [([3,5,1,2,9], [1,2,3,5,9]),
+                         ([1,3,2,4,5], [1,2,3,4,5]),
+                         ([Int()], [Int()]),
+                         ([1,2,3,4,5], [1,2,3,4,5])]
         //act
-        let actual = sorting.bubbleSort(data)
-        //assert
-        XCTAssertEqual(actual, expected)
+        for testCase in testCases {
+            let actual = sorting.quickSort(testCase.0)
+            //assert
+            XCTAssertEqual(actual, testCase.1)
+        }
     }
     
-    func testBubbleSortWithDifferentIntegerArrayReturnsSortedDifferentIntegerArray() {
+    func testBubbleSortPerformance() {
         //arrange
         let sorting = Sorting()
-        let data = [2,4,1,3,8]
-        let expected = [1,2,3,4,8]
+        let testArray = [1,3,6,2,2]
         //act
-        let actual = sorting.bubbleSort(data)
-        //assert
-        XCTAssertEqual(actual, expected)
+        measure {
+            _ = sorting.bubbleSort(testArray)
+        }
     }
 }
